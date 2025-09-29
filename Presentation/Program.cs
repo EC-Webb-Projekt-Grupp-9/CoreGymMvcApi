@@ -1,18 +1,28 @@
+using Data.Contexts;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddControllers()
+    .AddJsonOptions(opt =>
+    {
+        opt.JsonSerializerOptions.WriteIndented = true;
+        opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-var app = builder.Build();
+var connectionString = builder.Configuration.GetConnectionString("LocalDb") ?? throw new NullReferenceException("Connection string is null");
+builder.Services.AddDbContext<SqliteDataContext>(opt =>
+    opt.UseSqlite(connectionString));
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+
+
+var app = builder.Build();
+app.MapOpenApi();
+app.UseCors(c => c.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+
 
 app.UseHttpsRedirection();
 
