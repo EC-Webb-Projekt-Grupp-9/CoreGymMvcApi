@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{2DAB4990-6C8F-4F92-A754-92B5CDBE0B59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{9F5D036A-DB1F-4FFE-B8AF-73C921E568D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{38D7C544-8DF1-47C5-8391-E03A7A0A28A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DAB4990-6C8F-4F92-A754-92B5CDBE0B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAB4990-6C8F-4F92-A754-92B5CDBE0B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAB4990-6C8F-4F92-A754-92B5CDBE0B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAB4990-6C8F-4F92-A754-92B5CDBE0B59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F5D036A-DB1F-4FFE-B8AF-73C921E568D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F5D036A-DB1F-4FFE-B8AF-73C921E568D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F5D036A-DB1F-4FFE-B8AF-73C921E568D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F5D036A-DB1F-4FFE-B8AF-73C921E568D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D7C544-8DF1-47C5-8391-E03A7A0A28A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D7C544-8DF1-47C5-8391-E03A7A0A28A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D7C544-8DF1-47C5-8391-E03A7A0A28A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D7C544-8DF1-47C5-8391-E03A7A0A28A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {380740BB-4289-45DD-8092-C0457733A1B3}
+	EndGlobalSection
+EndGlobal
