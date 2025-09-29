@@ -1,5 +1,6 @@
 using Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,7 @@ builder.Services.AddDbContext<SqliteDataContext>(opt =>
 var app = builder.Build();
 app.MapOpenApi();
 app.UseCors(c => c.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
-
+app.MapScalarApiReference("/api/docs");
 
 app.UseHttpsRedirection();
 
