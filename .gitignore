@@ -417,3 +417,4 @@ FodyWeavers.xsd
 *.msm
 *.msp
 /Data/Data.csproj
+/Presentation/sqliteDb.db

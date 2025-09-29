@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace Data.Contexts;
 
-public class SqliteDataContext(DbContextOptions options) : IdentityDbContext<IdentityUser>(options)
+public class SqliteDataContext(DbContextOptions options) : IdentityDbContext<UserEntity>(options)
 {
 }
