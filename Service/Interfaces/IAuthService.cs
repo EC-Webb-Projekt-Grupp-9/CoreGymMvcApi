@@ -9,5 +9,5 @@ namespace Service.Interfaces;
 
 public interface IAuthService
 {
-    Task<bool> LoginAsync(UserLoginDto dto);
+    Task<bool> SignInAsync(UserLoginDto dto);
 }

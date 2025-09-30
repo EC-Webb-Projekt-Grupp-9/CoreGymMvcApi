@@ -10,7 +10,7 @@ public class AuthService(UserManager<UserEntity> userManager, SignInManager<User
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
 
-    public async Task<bool> LoginAsync(UserLoginDto dto)
+    public async Task<bool> SignInAsync(UserLoginDto dto)
     {
         var entity = await _userManager.FindByEmailAsync(dto.Email);
         if (entity == null) return false;

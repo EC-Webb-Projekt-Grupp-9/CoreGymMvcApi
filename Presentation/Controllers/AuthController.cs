@@ -13,13 +13,13 @@ public class AuthController(IAuthService authService) : ControllerBase
 {
     private readonly IAuthService _authService = authService;
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login(UserLoginDto dto)
+    [HttpPost("signin")]
+    public async Task<IActionResult> SignInAsync(UserLoginDto dto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var result = await _authService.LoginAsync(dto);
+        var result = await _authService.SignInAsync(dto);
         return result ? Ok(result) : BadRequest(ModelState);
     }
 
