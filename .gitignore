@@ -418,3 +418,6 @@ FodyWeavers.xsd
 *.msp
 /Data/Data.csproj
 /Presentation/sqliteDb.db
+
+/Presentation/sqliteDb.db-shm
+/Presentation/sqliteDb.db-wal
