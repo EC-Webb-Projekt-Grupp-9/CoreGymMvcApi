@@ -32,6 +32,7 @@ builder.Services.AddIdentity<UserEntity, IdentityRole>(opt =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddSingleton<ITrainingSessionService, TrainingSessionService>();
 
 
 
