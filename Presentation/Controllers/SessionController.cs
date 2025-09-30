@@ -13,23 +13,35 @@ namespace Presentation.Controllers
         private readonly ISessionService _sessionService = sessionService;
 
         [HttpGet]
-        public IActionResult GetSessions()
+        public async Task<IActionResult> GetSessions()
         {
-            var sessions = _sessionService.GetSessions();
+            var sessions = await _sessionService.GetSessions();
             return Ok(sessions);
         }
 
         [HttpPost] 
-        public IActionResult CreateSessions(AddSessionDto formData)
+        public async Task<IActionResult> CreateSessions(AddSessionDto formData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _sessionService.CreateSession(formData);
+            await _sessionService.CreateSession(formData);
             return Ok();
         }
 
+        [HttpPost("{sessionId}")]
+        public async Task<IActionResult> Delete(string sessionId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+
+            }
+            await _sessionService.DeleteTrainingSession(sessionId);
+            return Ok();
+        }
     }
 }
+

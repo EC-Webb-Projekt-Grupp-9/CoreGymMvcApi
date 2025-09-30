@@ -5,7 +5,8 @@ namespace Service.Interfaces
 {
     public interface ISessionService
     {
-        SessionEntity CreateSession(AddSessionDto formData);
-        List<SessionEntity> GetSessions();
+        Task<bool> CreateSession(AddSessionDto formData);
+        Task<IEnumerable<SessionEntity>> GetSessions();
+        Task<bool> DeleteTrainingSession(string sessionId);
     }
 }

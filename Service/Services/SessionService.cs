@@ -1,4 +1,6 @@
-﻿using Data.Entities;
+﻿using Data.Contexts;
+using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Service.Dtos;
 using Service.Interfaces;
 using System;
@@ -6,14 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Service.Services
 {
-    public class SessionService : ISessionService
+    public class SessionService(SqliteDataContext db) : ISessionService
     {
-        private readonly List<SessionEntity> sessions;
-        public SessionEntity CreateSession(AddSessionDto formData)
+        private readonly SqliteDataContext _db = db;
+
+        public virtual async Task<bool> CreateSession(AddSessionDto formData)
         {
             var newSession = new SessionEntity
             {
@@ -27,14 +29,32 @@ namespace Service.Services
                 Spots = formData.Spots
             };
 
-            sessions.Add(newSession);
-            return newSession;
+            _db.Sessions.Add(newSession);
+            await _db.SaveChangesAsync();
+            return true;
         }
 
-        public List<SessionEntity> GetSessions()
+        public virtual async Task<IEnumerable<SessionEntity>> GetSessions()
         {
-            var sessions = new List<SessionEntity>();
+            var sessions = await _db.Sessions.ToListAsync();
+            await _db.SaveChangesAsync();
             return sessions;
+        }
+
+        public virtual async Task<bool> DeleteTrainingSession(string sessionId)
+        {
+            
+            var trainingSessionToDelete = await _db.Sessions.FirstOrDefaultAsync(x => x.Id.ToString() == sessionId);
+            if (trainingSessionToDelete != null)
+            {
+                _db.Sessions.Remove(trainingSessionToDelete);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

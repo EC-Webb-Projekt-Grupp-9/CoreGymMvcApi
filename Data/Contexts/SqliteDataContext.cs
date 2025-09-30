@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,4 +12,5 @@ namespace Data.Contexts;
 
 public class SqliteDataContext(DbContextOptions options) : IdentityDbContext<IdentityUser>(options)
 {
+    public DbSet<SessionEntity> Sessions { get; set; } = null!;
 }
