@@ -12,4 +12,5 @@ namespace Data.Contexts;
 
 public class SqliteDataContext(DbContextOptions options) : IdentityDbContext<UserEntity>(options)
 {
+    public DbSet<SessionEntity> Sessions { get; set; } = null!;
 }

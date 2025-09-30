@@ -12,12 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LocalDb") ?? throw new NullReferenceException("Connection string is null");
 builder.Services.AddOpenApi();
 
+
 builder.Services.AddControllers()
     .AddJsonOptions(opt =>
     {
         opt.JsonSerializerOptions.WriteIndented = true;
         opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
+
 
 builder.Services.AddDbContext<SqliteDataContext>(opt =>
     opt.UseSqlite(connectionString));
@@ -26,7 +28,7 @@ builder.Services.AddDbContext<SqliteDataContext>(opt =>
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-
+builder.Services.AddScoped<ISessionService, SessionService>();
 
 
 builder.Services.AddIdentity<UserEntity, IdentityRole>(opt =>
