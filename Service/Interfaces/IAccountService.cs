@@ -10,4 +10,5 @@ namespace Service.Interfaces;
 public interface IAccountService
 {
     Task<bool> Register(UserRegisterDto dto);
+    Task<bool> UpdatePassword(UpdatePasswordDto dto);
 }

@@ -16,13 +16,17 @@ public class AccountController(IAccountService accountService) : ControllerBase
     public async Task<IActionResult> Register(UserRegisterDto dto)
     {
         
-        if (!ModelState.IsValid)
-        {
-            return BadRequest();
-            
-        }
+        if (!ModelState.IsValid) return BadRequest();
 
         var result = await _accountService.Register(dto);
         return result ? Ok() : Problem("Could not create user");
+    }
+
+    [HttpPost("updatepassword")]
+    public async Task<IActionResult> UpdatePassword(UpdatePasswordDto dto)
+    {
+        if (!ModelState.IsValid) return BadRequest();
+        var result = await _accountService.UpdatePassword(dto);
+        return result ? Ok() : Problem("could not update password");
     }
 }
