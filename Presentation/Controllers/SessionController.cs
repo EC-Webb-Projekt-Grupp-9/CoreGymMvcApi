@@ -19,6 +19,17 @@ namespace Presentation.Controllers
             return Ok(sessions);
         }
 
+        [HttpGet("{sessionId}")]
+        public async Task<IActionResult> GetSessionById(string sessionId)
+        {
+            var session = await _sessionService.GetSessionById(sessionId);
+            if (session == null)
+            {
+                return NotFound();
+            }
+            return Ok(session);
+        }
+
         [HttpPost] 
         public async Task<IActionResult> CreateSessions(AddSessionDto formData)
         {

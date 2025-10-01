@@ -19,8 +19,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.SessionEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")

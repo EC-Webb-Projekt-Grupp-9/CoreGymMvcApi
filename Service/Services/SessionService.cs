@@ -35,6 +35,13 @@ namespace Service.Services
             return sessions;
         }
 
+        public virtual async Task<SessionEntity?> GetSessionById(string sessionId)
+        {
+            var session = await _db.Sessions.FirstOrDefaultAsync(x => x.Id == sessionId);
+            await _db.SaveChangesAsync();
+            return session;
+        }
+
         public virtual async Task<bool> DeleteTrainingSession(string sessionId)
         {
             
