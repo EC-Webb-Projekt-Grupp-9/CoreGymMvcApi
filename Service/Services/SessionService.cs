@@ -50,5 +50,28 @@ namespace Service.Services
                 return false;
             }
         }
+
+        public virtual async Task<bool> EditTrainingSession(EditSessionDto formData)
+        {
+            var trainingSessionToEdit = await _db.Sessions.FirstOrDefaultAsync(x => x.Id == formData.Id);
+            if (trainingSessionToEdit != null)
+            {
+                trainingSessionToEdit.StartTime = DateTime.Now;
+                trainingSessionToEdit.Duration = formData.Duration;
+                trainingSessionToEdit.Title = formData.Title;
+                trainingSessionToEdit.Description = formData.Description;
+                trainingSessionToEdit.Trainer = formData.Trainer;
+                trainingSessionToEdit.Location = formData.Location;
+                trainingSessionToEdit.Spots = formData.Spots;
+
+                _db.Sessions.Update(trainingSessionToEdit);
+                await _db.SaveChangesAsync();
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
+        }
     }
 }

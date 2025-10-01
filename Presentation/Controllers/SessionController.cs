@@ -31,7 +31,7 @@ namespace Presentation.Controllers
             return Ok();
         }
 
-        [HttpPost("{sessionId}")]
+        [HttpDelete("{sessionId}")]
         public async Task<IActionResult> Delete(string sessionId)
         {
             if (!ModelState.IsValid)
@@ -40,6 +40,18 @@ namespace Presentation.Controllers
 
             }
             await _sessionService.DeleteTrainingSession(sessionId);
+            return Ok();
+        }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> Update(EditSessionDto formData)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+
+            }
+            await _sessionService.EditTrainingSession(formData);
             return Ok();
         }
     }

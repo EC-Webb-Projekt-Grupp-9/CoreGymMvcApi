@@ -16,16 +16,16 @@ namespace Service.Dtos
         public int Duration { get; set; }
 
         [Required]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         [Required]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         [Required]
-        public string Trainer { get; set; }
+        public string Trainer { get; set; } = null!;
 
         [Required]
-        public string Location { get; set; }
+        public string Location { get; set; } = null!;
 
         [Required]
         public int Spots { get; set; }
