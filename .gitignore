@@ -421,3 +421,5 @@ FodyWeavers.xsd
 
 /Presentation/sqliteDb.db-shm
 /Presentation/sqliteDb.db-wal
+/Presentation/sqliteDb.db-shm
+/Presentation/sqliteDb.db-wal
