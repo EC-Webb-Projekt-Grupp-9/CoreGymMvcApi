@@ -18,4 +18,10 @@ public class AuthService(UserManager<UserEntity> userManager, SignInManager<User
         var result = await _signInManager.PasswordSignInAsync(entity, dto.Password, true, false);
         return result.Succeeded ? true : false;
     }
+
+    public async Task<bool> SignOut()
+    {
+        await _signInManager.SignOutAsync();
+        return true;
+    }
 }

@@ -20,7 +20,15 @@ public class AuthController(IAuthService authService) : ControllerBase
             return BadRequest(ModelState);
 
         var result = await _authService.SignInAsync(dto);
-        return result ? Ok(result) : BadRequest(ModelState);
+        return result ? Ok(new {Success = true}) : BadRequest(ModelState);
+    }
+
+    [Authorize]
+    [HttpGet("signout")]
+    public async Task<IActionResult> SignOut()
+    {
+        bool result = await _authService.SignOut();
+        return Ok();
     }
 
     [Authorize]
