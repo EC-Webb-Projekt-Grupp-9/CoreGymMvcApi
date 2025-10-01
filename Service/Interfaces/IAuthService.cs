@@ -10,4 +10,5 @@ namespace Service.Interfaces;
 public interface IAuthService
 {
     Task<bool> SignInAsync(UserLoginDto dto);
+    Task<bool> SignOut();
 }
