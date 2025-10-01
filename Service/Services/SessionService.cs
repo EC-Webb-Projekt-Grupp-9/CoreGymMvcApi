@@ -3,11 +3,6 @@ using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Service.Dtos;
 using Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Services
 {
@@ -19,7 +14,6 @@ namespace Service.Services
         {
             var newSession = new SessionEntity
             {
-                Id = Guid.NewGuid(),
                 StartTime = DateTime.Now,
                 Duration = formData.Duration,
                 Title = formData.Title,
@@ -44,7 +38,7 @@ namespace Service.Services
         public virtual async Task<bool> DeleteTrainingSession(string sessionId)
         {
             
-            var trainingSessionToDelete = await _db.Sessions.FirstOrDefaultAsync(x => x.Id.ToString() == sessionId);
+            var trainingSessionToDelete = await _db.Sessions.FirstOrDefaultAsync(x => x.Id == sessionId);
             if (trainingSessionToDelete != null)
             {
                 _db.Sessions.Remove(trainingSessionToDelete);

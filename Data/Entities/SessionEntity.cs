@@ -8,7 +8,7 @@ namespace Data.Entities
 {
     public class SessionEntity
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public DateTime StartTime { get; set; }
         public int Duration { get; set; }
         public string Title { get; set; } = null!;
