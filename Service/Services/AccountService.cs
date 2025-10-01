@@ -28,4 +28,16 @@ public class AccountService(UserManager<UserEntity> userManager) : IAccountServi
         var result = await _userManager.CreateAsync(entity, dto.Password);
         return result.Succeeded;
     }
+
+    public async Task<bool> UpdatePassword(UpdatePasswordDto dto)
+    {
+        var entity = await _userManager.FindByEmailAsync(dto.Email);
+        if (entity == null) return false;
+
+        var currentPasswordIsValid = await _userManager.CheckPasswordAsync(entity, dto.CurrentPassword);
+        if (!currentPasswordIsValid) return false;
+
+        var result = await _userManager.ChangePasswordAsync(entity, dto.CurrentPassword, dto.NewPassword);
+        return result.Succeeded ? true : false;
+    }
 }
