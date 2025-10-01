@@ -12,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LocalDb") ?? throw new NullReferenceException("Connection string is null");
 builder.Services.AddOpenApi();
 
-
 builder.Services.AddControllers()
     .AddJsonOptions(opt =>
     {
@@ -23,8 +22,6 @@ builder.Services.AddControllers()
 
 builder.Services.AddDbContext<SqliteDataContext>(opt =>
     opt.UseSqlite(connectionString));
-
-
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -46,27 +43,19 @@ builder.Services.ConfigureApplicationCookie(opt =>
     opt.SlidingExpiration = true;
 });
 
-builder.Services.Configure<CookiePolicyOptions>(opt =>
-{
-    opt.ConsentCookie.Name = "ConsentCookie";
-    opt.CheckConsentNeeded = context => true;
-    opt.MinimumSameSitePolicy = SameSiteMode.Lax;
-});
-
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-})
-    .AddCookie();
 
 
 
 
 
 var app = builder.Build();
+app.UseCors(c => c
+    .WithOrigins("http://localhost:5173")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials());
 app.MapOpenApi();
-app.UseCors(c => c.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 app.MapScalarApiReference("/api/docs");
 
 app.UseHttpsRedirection();
