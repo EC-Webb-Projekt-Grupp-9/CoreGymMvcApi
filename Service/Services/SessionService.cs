@@ -3,11 +3,6 @@ using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Service.Dtos;
 using Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Services
 {
@@ -19,7 +14,6 @@ namespace Service.Services
         {
             var newSession = new SessionEntity
             {
-                Id = Guid.NewGuid(),
                 StartTime = DateTime.Now,
                 Duration = formData.Duration,
                 Title = formData.Title,
@@ -44,13 +38,36 @@ namespace Service.Services
         public virtual async Task<bool> DeleteTrainingSession(string sessionId)
         {
             
-            var trainingSessionToDelete = await _db.Sessions.FirstOrDefaultAsync(x => x.Id.ToString() == sessionId);
+            var trainingSessionToDelete = await _db.Sessions.FirstOrDefaultAsync(x => x.Id == sessionId);
             if (trainingSessionToDelete != null)
             {
                 _db.Sessions.Remove(trainingSessionToDelete);
                 await _db.SaveChangesAsync();
                 return true;
             }
+            else
+            {
+                return false;
+            }
+        }
+
+        public virtual async Task<bool> EditTrainingSession(EditSessionDto formData)
+        {
+            var trainingSessionToEdit = await _db.Sessions.FirstOrDefaultAsync(x => x.Id == formData.Id);
+            if (trainingSessionToEdit != null)
+            {
+                trainingSessionToEdit.StartTime = DateTime.Now;
+                trainingSessionToEdit.Duration = formData.Duration;
+                trainingSessionToEdit.Title = formData.Title;
+                trainingSessionToEdit.Description = formData.Description;
+                trainingSessionToEdit.Trainer = formData.Trainer;
+                trainingSessionToEdit.Location = formData.Location;
+                trainingSessionToEdit.Spots = formData.Spots;
+
+                _db.Sessions.Update(trainingSessionToEdit);
+                await _db.SaveChangesAsync();
+                return true;
+            } 
             else
             {
                 return false;

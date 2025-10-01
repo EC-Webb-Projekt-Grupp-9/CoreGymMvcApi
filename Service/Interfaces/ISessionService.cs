@@ -7,6 +7,7 @@ namespace Service.Interfaces
     {
         Task<bool> CreateSession(AddSessionDto formData);
         Task<IEnumerable<SessionEntity>> GetSessions();
+        Task<bool> EditTrainingSession(EditSessionDto formData);
         Task<bool> DeleteTrainingSession(string sessionId);
     }
 }
