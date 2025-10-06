@@ -14,7 +14,7 @@ namespace Service.Services
         {
             var newSession = new SessionEntity
             {
-                StartTime = DateTime.Now,
+                StartTime = formData.StartTime,
                 Duration = formData.Duration,
                 Title = formData.Title,
                 Description = formData.Description,
