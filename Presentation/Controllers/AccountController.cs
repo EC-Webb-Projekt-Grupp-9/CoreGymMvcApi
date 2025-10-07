@@ -12,6 +12,7 @@ public class AccountController(IAccountService accountService) : ControllerBase
 {
     private readonly IAccountService _accountService = accountService;
 
+
     [HttpPost]
     public async Task<IActionResult> RegisterAsync(UserRegisterDto dto)
     {

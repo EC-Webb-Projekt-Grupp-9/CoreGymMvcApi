@@ -9,9 +9,10 @@ namespace Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AuthController(IAuthService authService) : ControllerBase
+public class AuthController(IAuthService authService, IAccountService accountService) : ControllerBase
 {
     private readonly IAuthService _authService = authService;
+    private readonly IAccountService _accountService = accountService;
 
     [HttpPost("signin")]
     public async Task<IActionResult> SignInAsync(UserLoginDto dto)
@@ -40,6 +41,8 @@ public class AuthController(IAuthService authService) : ControllerBase
         if (string.IsNullOrEmpty(email))
             return Unauthorized(new { Message = "Email claim not found" });
 
-        return Ok(new { Email = email });
+        var user = _accountService.GetUserAsync(email);
+
+        return Ok(user);
     }
 }

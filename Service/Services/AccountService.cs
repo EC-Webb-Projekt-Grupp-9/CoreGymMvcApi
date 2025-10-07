@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Service.Dtos;
 using Service.Interfaces;
+using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,21 @@ public class AccountService(UserManager<UserEntity> userManager) : IAccountServi
 
         var result = await _userManager.CreateAsync(entity, dto.Password);
         return result.Succeeded;
+    }
+
+    public async Task<User> GetUserAsync(string email)
+    {
+        var Entity = await _userManager.FindByEmailAsync(email);
+        if (Entity is null) return null!;
+
+        var model = new User
+        {
+            FirstName = Entity.FirstName,
+            LastName= Entity.LastName,
+            Email = Entity.Email,
+        };
+
+        return model;
     }
 
     public async Task<bool> UpdatePasswordAsync(UpdatePasswordDto dto)
